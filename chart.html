@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Open-Plant JS</title>
+    <script src="open-plant.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="open-plant-historian">
+    </div>
+
+    <script type="text/javascript">
+        var a = new OP.Historian('open-plant-historian', {
+            demoMode: true,
+            // rangeFrom: Date.now() - (30 * 24 * 60 * 60 * 1000),
+            // rangeTo: Date.now(),
+            showAddTrends: true,
+            showPrint: true,
+            showZoomPanReset: true,
+            showChartRange: true,
+            selectedChartRange: 3,
+            showLegend: true,
+            showYAxis: true,
+            showOnlyFirstYAxis: false,
+            showRangeText: true,
+            legend: {
+                showColor: true,
+                showMeasure: true,
+                showDescription: true,
+                showLocation: true,
+                showShow: true,
+                showDelete: true,
+            },
+            trends: [
+                { tagId: 'FIC0002.Value' },
+                { tagId: 'WIC0003.Value' },
+            ]
+        });
+
+        // const userAction = async () => {
+        //     const response = await fetch('http://localhost:33171/api/users');
+        //     const result = await response.json(); //extract JSON from the http response
+        //     console.log(result);
+        // }
+        // userAction();
+
+        function TestWebAPICall() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("Web API call successful!");
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "http://localhost:33171/api/users");
+            xhttp.setRequestHeader("Authorization", "Basic " + btoa("Administrator:Admin"));
+            xhttp.send();
+        }
+        TestWebAPICall();
+    </script>
+</body>
+
+</html>
